@@ -444,8 +444,10 @@ def apply_adam_step_to_all_parameters(parameters, optimizer_state, learning_rate
     _ = [parameters[i].data.sub_(update) for i, update in zip(active, updates)]
     return optimizer_state
 
-# Step 70 - zero_all_parameter_gradients (not yet solved)
-# TODO: implement
+# Step 70 - zero_all_parameter_gradients
+def zero_all_parameter_gradients(parameters):
+    _ = [setattr(parameter, 'grad', None) for parameter in parameters]
+    return None
 
 # Step 71 - compute_batch_training_loss (not yet solved)
 # TODO: implement
