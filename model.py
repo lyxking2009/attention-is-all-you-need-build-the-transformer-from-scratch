@@ -116,20 +116,34 @@ import torch
 def apply_attention_weights_to_values(attention_weights, value):
     return torch.matmul(attention_weights, value)
 
-# Step 22 - scaled_dot_product_attention (not yet solved)
-# TODO: implement
+# Step 22 - scaled_dot_product_attention
+import torch
+def scaled_dot_product_attention(query, key, value, mask=None):
+    return (lambda scores: (lambda weights: (weights @ value, weights))(torch.nan_to_num(torch.softmax(scores, dim=-1), nan=0.0)))(((query @ key.transpose(-2, -1)) / (query.size(-1) ** 0.5)).masked_fill(~mask, float("-inf")) if mask is not None else (query @ key.transpose(-2, -1)) / (query.size(-1) ** 0.5))
 
-# Step 23 - split_last_dim_into_heads (not yet solved)
-# TODO: implement
+# Step 23 - split_last_dim_into_heads
+import torch
+def split_last_dim_into_heads(tensor, num_heads):
+    B, L, d_model = tensor.shape
+    d_k = d_model // num_heads
+    return tensor.reshape(B, L, num_heads, d_k)
 
-# Step 24 - transpose_heads_before_sequence (not yet solved)
-# TODO: implement
+# Step 24 - transpose_heads_before_sequence
+import torch
+def transpose_heads_before_sequence(tensor):
+    return tensor.permute(0, 2, 1, 3)
 
-# Step 25 - merge_heads_back_to_model_dim (not yet solved)
-# TODO: implement
+# Step 25 - merge_heads_back_to_model_dim
+import torch
 
-# Step 26 - apply_linear_projection (not yet solved)
-# TODO: implement
+def merge_heads_back_to_model_dim(multi_head_tensor):
+    return multi_head_tensor.transpose(1, 2).contiguous().view(multi_head_tensor.shape[0], multi_head_tensor.shape[2], -1)
+
+# Step 26 - apply_linear_projection
+import torch
+
+def apply_linear_projection(x, weight, bias=None):
+    return torch.nn.functional.linear(x, weight, bias)
 
 # Step 27 - project_to_query_key_value (not yet solved)
 # TODO: implement

@@ -31,11 +31,11 @@ python scaffold.py
 - [x] **19.** mask_attention_scores_with_neg_inf
 - [x] **20.** softmax_attention_weights
 - [x] **21.** apply_attention_weights_to_values
-- [ ] **22.** scaled_dot_product_attention
-- [ ] **23.** split_last_dim_into_heads
-- [ ] **24.** transpose_heads_before_sequence
-- [ ] **25.** merge_heads_back_to_model_dim
-- [ ] **26.** apply_linear_projection
+- [x] **22.** scaled_dot_product_attention
+- [x] **23.** split_last_dim_into_heads
+- [x] **24.** transpose_heads_before_sequence
+- [x] **25.** merge_heads_back_to_model_dim
+- [x] **26.** apply_linear_projection
 - [ ] **27.** project_to_query_key_value
 - [ ] **28.** split_qkv_into_heads
 - [ ] **29.** multi_head_scaled_dot_product_attention
