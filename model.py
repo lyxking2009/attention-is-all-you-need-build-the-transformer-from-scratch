@@ -377,8 +377,9 @@ def shift_targets_right_with_start_token(target_ids, start_token_id):
     start_tokens = torch.full((target_ids.shape[0], 1), start_token_id, dtype=target_ids.dtype, device=target_ids.device)
     return torch.cat((start_tokens, target_ids[:, :-1]), dim=1)
 
-# Step 57 - compute_noam_learning_rate (not yet solved)
-# TODO: implement
+# Step 57 - compute_noam_learning_rate
+def compute_noam_learning_rate(step, d_model, warmup_steps):
+    return float(d_model ** -0.5 * min(step ** -0.5, step * warmup_steps ** -1.5))
 
 # Step 58 - build_uniform_smoothing_distribution (not yet solved)
 # TODO: implement
