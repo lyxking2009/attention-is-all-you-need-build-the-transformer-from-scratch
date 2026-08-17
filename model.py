@@ -247,8 +247,9 @@ def assemble_decoder_layer(y, encoder_output, layer_params, num_heads, src_mask=
 def stack_decoder_layers(y, encoder_output, decoder_layer_params_list, num_heads, src_mask=None, tgt_mask=None):
     return y if len(decoder_layer_params_list) == 0 else stack_decoder_layers(assemble_decoder_layer(y, encoder_output, decoder_layer_params_list[0], num_heads, src_mask, tgt_mask), encoder_output, decoder_layer_params_list[1:], num_heads, src_mask, tgt_mask)
 
-# Step 48 - apply_final_output_projection (not yet solved)
-# TODO: implement
+# Step 48 - apply_final_output_projection
+def apply_final_output_projection(decoder_output, output_weight, output_bias=None):
+    return apply_linear_projection(decoder_output, output_weight, output_bias)
 
 # Step 49 - tie_output_projection_to_token_embeddings (not yet solved)
 # TODO: implement
