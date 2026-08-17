@@ -82,8 +82,11 @@ def add_positional_encoding_to_embeddings(embeddings, positional_encoding):
 def build_padding_mask(token_ids, pad_id):
         return (token_ids != pad_id).unsqueeze(1).unsqueeze(1)
 
-# Step 15 - build_causal_mask (not yet solved)
-# TODO: implement
+# Step 15 - build_causal_mask
+import torch
+
+def build_causal_mask(seq_len):
+    return torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool)).unsqueeze(0).unsqueeze(0)
 
 # Step 16 - combine_padding_and_causal_masks (not yet solved)
 # TODO: implement
