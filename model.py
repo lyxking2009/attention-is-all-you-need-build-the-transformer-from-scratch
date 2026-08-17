@@ -474,8 +474,9 @@ def run_training_step_with_backprop(src_token_ids, tgt_token_ids, parameter_list
 def run_training_loop_for_steps(batches, parameter_list, model_params, optimizer_state, num_steps, config):
     return [run_training_step_with_backprop(batches[index % len(batches)][0], batches[index % len(batches)][1], parameter_list, model_params, optimizer_state, index + 1, config) for index in range(num_steps)]
 
-# Step 74 - pick_next_token_by_argmax (not yet solved)
-# TODO: implement
+# Step 74 - pick_next_token_by_argmax
+def pick_next_token_by_argmax(final_timestep_logits):
+    return final_timestep_logits.argmax(dim=-1)
 
 # Step 75 - compute_length_penalty (not yet solved)
 # TODO: implement
