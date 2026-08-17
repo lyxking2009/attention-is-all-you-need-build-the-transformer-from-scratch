@@ -151,8 +151,11 @@ import torch
 def project_to_query_key_value(x, w_q, b_q, w_k, b_k, w_v, b_v):
     return (torch.nn.functional.linear(x, w_q, b_q), torch.nn.functional.linear(x, w_k, b_k), torch.nn.functional.linear(x, w_v, b_v))
 
-# Step 28 - split_qkv_into_heads (not yet solved)
-# TODO: implement
+# Step 28 - split_qkv_into_heads
+import torch
+
+def split_qkv_into_heads(q, k, v, num_heads):
+    return tuple(t.view(t.shape[0], t.shape[1], num_heads, -1).transpose(1, 2) for t in (q, k, v))
 
 # Step 29 - multi_head_scaled_dot_product_attention (not yet solved)
 # TODO: implement
