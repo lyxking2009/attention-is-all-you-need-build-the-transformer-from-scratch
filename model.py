@@ -449,8 +449,15 @@ def zero_all_parameter_gradients(parameters):
     _ = [setattr(parameter, 'grad', None) for parameter in parameters]
     return None
 
-# Step 71 - compute_batch_training_loss (not yet solved)
-# TODO: implement
+# Step 71 - compute_batch_training_loss
+def compute_batch_training_loss(src_token_ids, tgt_token_ids, model_params, config):
+    model_params['token_embedding'] = model_params['token_embedding'] if 'token_embedding' in model_params else model_params['tgt_embedding']
+    decoder_input = shift_targets_right_with_start_token(tgt_token_ids, config['start_id'])
+    log_probabilities = run_transformer_forward(src_token_ids, decoder_input, model_params, config['num_heads'], config['pad_id'])
+    smoothed = build_uniform_smoothing_distribution(log_probabilities.shape, config['vocab_size'], config['smoothing']).to(log_probabilities)
+    smoothed = set_confidence_on_gold_tokens(smoothed, tgt_token_ids, 1 - config['smoothing'])
+    smoothed = zero_pad_column_and_pad_token_rows(smoothed, tgt_token_ids, config['pad_id'])
+    return average_loss_over_non_pad_tokens(compute_label_smoothed_kl_loss(log_probabilities, smoothed), tgt_token_ids, config['pad_id'])
 
 # Step 72 - run_training_step_with_backprop (not yet solved)
 # TODO: implement
