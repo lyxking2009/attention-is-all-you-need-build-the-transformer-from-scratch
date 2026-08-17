@@ -174,8 +174,9 @@ def assemble_multi_head_attention_forward(Q, K, V, W_q, W_k, W_v, W_o, num_heads
 def apply_ffn_first_linear_and_relu(x, w1, b1):
     return torch.relu(x @ w1 + b1)
 
-# Step 33 - apply_ffn_second_linear (not yet solved)
-# TODO: implement
+# Step 33 - apply_ffn_second_linear
+def apply_ffn_second_linear(hidden, w2, b2):
+    return hidden @ w2 + b2
 
 # Step 34 - position_wise_feed_forward_network (not yet solved)
 # TODO: implement
