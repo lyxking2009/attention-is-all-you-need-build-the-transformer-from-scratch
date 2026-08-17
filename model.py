@@ -295,8 +295,68 @@ def init_encoder_layer_parameters(d_model, num_heads, d_ff):
     params['ffn_beta'] = torch.zeros(d_model, requires_grad=True)
     return params
 
-# Step 53 - init_decoder_layer_parameters (not yet solved)
-# TODO: implement
+# Step 53 - init_decoder_layer_parameters
+def init_decoder_layer_parameters(d_model, num_heads, d_ff):
+    params = {}
+    params['w_q_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_k_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_v_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_o_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_q_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_k_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_v_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_o_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w1'] = (torch.randn(d_model, d_ff) / math.sqrt(d_model)).requires_grad_()
+    params['b1'] = torch.zeros(d_ff, requires_grad=True)
+    params['w2'] = (torch.randn(d_ff, d_model) / math.sqrt(d_ff)).requires_grad_()
+    params['b2'] = torch.zeros(d_model, requires_grad=True)
+    params['self_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['self_beta'] = torch.zeros(d_model, requires_grad=True)
+    params['cross_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['cross_beta'] = torch.zeros(d_model, requires_grad=True)
+    params['ffn_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['ffn_beta'] = torch.zeros(d_model, requires_grad=True)
+def init_decoder_layer_parameters(d_model, num_heads, d_ff):
+    params = {}
+    params['w_q_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_k_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_v_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_o_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_q_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_k_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_v_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_o_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w1'] = (torch.randn(d_model, d_ff) / math.sqrt(d_model)).requires_grad_()
+    params['b1'] = torch.zeros(d_ff, requires_grad=True)
+    params['w2'] = (torch.randn(d_ff, d_model) / math.sqrt(d_ff)).requires_grad_()
+    params['b2'] = torch.zeros(d_model, requires_grad=True)
+    params['self_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['self_beta'] = torch.zeros(d_model, requires_grad=True)
+    params['cross_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['cross_beta'] = torch.zeros(d_model, requires_grad=True)
+    params['ffn_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['ffn_beta'] = torch.zeros(d_model, requires_grad=True)
+def init_decoder_layer_parameters(d_model, num_heads, d_ff):
+    params = {}
+    params['w_q_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_k_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_v_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_o_self'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_q_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_k_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_v_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w_o_cross'] = (torch.randn(d_model, d_model) / math.sqrt(d_model)).requires_grad_()
+    params['w1'] = (torch.randn(d_model, d_ff) / math.sqrt(d_model)).requires_grad_()
+    params['b1'] = torch.zeros(d_ff, requires_grad=True)
+    params['w2'] = (torch.randn(d_ff, d_model) / math.sqrt(d_ff)).requires_grad_()
+    params['b2'] = torch.zeros(d_model, requires_grad=True)
+    params['self_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['self_beta'] = torch.zeros(d_model, requires_grad=True)
+    params['cross_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['cross_beta'] = torch.zeros(d_model, requires_grad=True)
+    params['ffn_gamma'] = torch.ones(d_model, requires_grad=True)
+    params['ffn_beta'] = torch.zeros(d_model, requires_grad=True)
+    return params
 
 # Step 54 - init_embedding_and_projection_parameters (not yet solved)
 # TODO: implement
