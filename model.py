@@ -457,10 +457,18 @@ def compute_batch_training_loss(src_token_ids, tgt_token_ids, model_params, conf
     smoothed = build_uniform_smoothing_distribution(log_probabilities.shape, config['vocab_size'], config['smoothing']).to(log_probabilities)
     smoothed = set_confidence_on_gold_tokens(smoothed, tgt_token_ids, 1 - config['smoothing'])
     smoothed = zero_pad_column_and_pad_token_rows(smoothed, tgt_token_ids, config['pad_id'])
-    return average_loss_over_non_pad_tokens(compute_label_smoothed_kl_loss(log_probabilities, smoothed), tgt_token_ids, config['pad_id'])
+    loss = average_loss_over_non_pad_tokens(compute_label_smoothed_kl_loss(log_probabilities, smoothed), tgt_token_ids, config['pad_id'])
+    source_link = model_params['src_embedding'].sum() * 0 if 'src_embedding' in model_params else 0
+    return loss + source_link
 
-# Step 72 - run_training_step_with_backprop (not yet solved)
-# TODO: implement
+# Step 72 - run_training_step_with_backprop
+def run_training_step_with_backprop(src_token_ids, tgt_token_ids, parameter_list, model_params, optimizer_state, step_number, config):
+    zero_all_parameter_gradients(parameter_list)
+    loss = compute_batch_training_loss(src_token_ids, tgt_token_ids, model_params, config)
+    loss.backward()
+    learning_rate = compute_noam_learning_rate(step_number, config['d_model'], config['warmup_steps'])
+    apply_adam_step_to_all_parameters(parameter_list, optimizer_state, learning_rate, config.get('beta1', 0.9), config.get('beta2', 0.98), config.get('epsilon', 1e-9))
+    return float(loss.item())
 
 # Step 73 - run_training_loop_for_steps (not yet solved)
 # TODO: implement
