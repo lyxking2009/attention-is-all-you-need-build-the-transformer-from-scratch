@@ -365,8 +365,12 @@ def init_embedding_and_projection_parameters(vocab_size, d_model, tie_weights=Tr
     output_projection = tgt_embedding if tie_weights else (torch.randn(vocab_size, d_model) / math.sqrt(d_model)).requires_grad_()
     return {'src_embedding': src_embedding, 'tgt_embedding': tgt_embedding, 'output_projection': output_projection}
 
-# Step 55 - collect_model_parameters_into_list (not yet solved)
-# TODO: implement
+# Step 55 - collect_model_parameters_into_list
+def collect_model_parameters_into_list(encoder_layer_params_list, decoder_layer_params_list, embedding_params):
+    parameters = [parameter for layer in encoder_layer_params_list for parameter in layer.values()]
+    parameters += [parameter for layer in decoder_layer_params_list for parameter in layer.values()]
+    parameters += list(embedding_params.values())
+    return list({id(parameter): parameter for parameter in parameters}.values())
 
 # Step 56 - shift_targets_right_with_start_token (not yet solved)
 # TODO: implement
