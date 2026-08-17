@@ -170,8 +170,9 @@ def merge_heads_and_project_output(context, w_o, b_o):
 def assemble_multi_head_attention_forward(Q, K, V, W_q, W_k, W_v, W_o, num_heads, attention_mask=None):
     B, T_q, D = Q.shape; T_k = K.shape[1]; d_h = D // num_heads; q = (Q @ W_q).reshape(B, T_q, num_heads, d_h).transpose(1, 2); k = (K @ W_k).reshape(B, T_k, num_heads, d_h).transpose(1, 2); v = (V @ W_v).reshape(B, T_k, num_heads, d_h).transpose(1, 2); scores = q @ k.transpose(-2, -1) / (d_h ** 0.5); scores = scores.masked_fill(attention_mask == 0, float('-inf')) if attention_mask is not None else scores; return ((torch.softmax(scores, dim=-1) @ v).transpose(1, 2).reshape(B, T_q, D) @ W_o)
 
-# Step 32 - apply_ffn_first_linear_and_relu (not yet solved)
-# TODO: implement
+# Step 32 - apply_ffn_first_linear_and_relu
+def apply_ffn_first_linear_and_relu(x, w1, b1):
+    return torch.relu(x @ w1 + b1)
 
 # Step 33 - apply_ffn_second_linear (not yet solved)
 # TODO: implement
