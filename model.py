@@ -478,8 +478,9 @@ def run_training_loop_for_steps(batches, parameter_list, model_params, optimizer
 def pick_next_token_by_argmax(final_timestep_logits):
     return final_timestep_logits.argmax(dim=-1)
 
-# Step 75 - compute_length_penalty (not yet solved)
-# TODO: implement
+# Step 75 - compute_length_penalty
+def compute_length_penalty(length, alpha):
+    return float(((5 + length) / 6) ** alpha)
 
 # Step 76 - compute_candidate_scores (not yet solved)
 # TODO: implement
