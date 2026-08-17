@@ -226,8 +226,11 @@ def decoder_layer_masked_self_attention_sublayer(y, W_q, W_k, W_v, W_o, gamma, b
     attention_output = assemble_multi_head_attention_forward(y, y, y, W_q, W_k, W_v, W_o, num_heads, tgt_mask)
     return apply_residual_add_and_norm(y, attention_output, gamma, beta)
 
-# Step 44 - decoder_layer_cross_attention_sublayer (not yet solved)
-# TODO: implement
+# Step 44 - decoder_layer_cross_attention_sublayer
+def decoder_layer_cross_attention_sublayer(y, encoder_output, W_q, W_k, W_v, W_o, gamma, beta, num_heads, src_mask=None):
+    attention_mask = src_mask[:, None, None, :] if src_mask is not None and src_mask.dim() == 2 else src_mask
+    attention_output = assemble_multi_head_attention_forward(y, encoder_output, encoder_output, W_q, W_k, W_v, W_o, num_heads, attention_mask)
+    return apply_residual_add_and_norm(y, attention_output, gamma, beta)
 
 # Step 45 - decoder_layer_feed_forward_sublayer (not yet solved)
 # TODO: implement
