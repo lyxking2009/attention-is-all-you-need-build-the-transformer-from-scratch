@@ -401,8 +401,10 @@ def zero_pad_column_and_pad_token_rows(distribution, gold_token_ids, pad_id):
 def compute_label_smoothed_kl_loss(log_probabilities, smoothed_distribution):
     return (smoothed_distribution * -log_probabilities).sum()
 
-# Step 62 - average_loss_over_non_pad_tokens (not yet solved)
-# TODO: implement
+# Step 62 - average_loss_over_non_pad_tokens
+def average_loss_over_non_pad_tokens(total_loss, gold_token_ids, pad_id):
+    non_pad_count = (gold_token_ids != pad_id).sum()
+    return total_loss / non_pad_count.clamp_min(1)
 
 # Step 63 - compute_token_accuracy_ignoring_pad (not yet solved)
 # TODO: implement
