@@ -78,8 +78,9 @@ def build_sinusoidal_positional_encoding(max_len, d_model):
 def add_positional_encoding_to_embeddings(embeddings, positional_encoding):
         return embeddings + positional_encoding[:embeddings.size(1)].unsqueeze(0)
 
-# Step 14 - build_padding_mask (not yet solved)
-# TODO: implement
+# Step 14 - build_padding_mask
+def build_padding_mask(token_ids, pad_id):
+        return (token_ids != pad_id).unsqueeze(1).unsqueeze(1)
 
 # Step 15 - build_causal_mask (not yet solved)
 # TODO: implement
