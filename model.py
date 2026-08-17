@@ -92,8 +92,9 @@ def build_causal_mask(seq_len):
 def combine_padding_and_causal_masks(padding_mask, causal_mask):
         return padding_mask & causal_mask
 
-# Step 17 - compute_raw_attention_scores (not yet solved)
-# TODO: implement
+# Step 17 - compute_raw_attention_scores
+def compute_raw_attention_scores(query, key):
+        return query @ key.transpose(-2, -1)
 
 # Step 18 - scale_attention_scores (not yet solved)
 # TODO: implement
