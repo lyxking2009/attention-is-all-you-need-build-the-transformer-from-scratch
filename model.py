@@ -232,8 +232,10 @@ def decoder_layer_cross_attention_sublayer(y, encoder_output, W_q, W_k, W_v, W_o
     attention_output = assemble_multi_head_attention_forward(y, encoder_output, encoder_output, W_q, W_k, W_v, W_o, num_heads, attention_mask)
     return apply_residual_add_and_norm(y, attention_output, gamma, beta)
 
-# Step 45 - decoder_layer_feed_forward_sublayer (not yet solved)
-# TODO: implement
+# Step 45 - decoder_layer_feed_forward_sublayer
+def decoder_layer_feed_forward_sublayer(y, w1, b1, w2, b2, gamma, beta):
+    ffn_output = position_wise_feed_forward_network(y, w1, b1, w2, b2)
+    return apply_residual_add_and_norm(y, ffn_output, gamma, beta)
 
 # Step 46 - assemble_decoder_layer (not yet solved)
 # TODO: implement
