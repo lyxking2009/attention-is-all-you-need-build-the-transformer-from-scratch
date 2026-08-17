@@ -221,8 +221,10 @@ def assemble_encoder_layer(x, layer_params, num_heads, src_mask=None):
 def stack_encoder_layers(x, encoder_layer_params_list, num_heads, src_mask=None):
     return x if len(encoder_layer_params_list) == 0 else stack_encoder_layers(assemble_encoder_layer(x, encoder_layer_params_list[0], num_heads, src_mask), encoder_layer_params_list[1:], num_heads, src_mask)
 
-# Step 43 - decoder_layer_masked_self_attention_sublayer (not yet solved)
-# TODO: implement
+# Step 43 - decoder_layer_masked_self_attention_sublayer
+def decoder_layer_masked_self_attention_sublayer(y, W_q, W_k, W_v, W_o, gamma, beta, num_heads, tgt_mask=None):
+    attention_output = assemble_multi_head_attention_forward(y, y, y, W_q, W_k, W_v, W_o, num_heads, tgt_mask)
+    return apply_residual_add_and_norm(y, attention_output, gamma, beta)
 
 # Step 44 - decoder_layer_cross_attention_sublayer (not yet solved)
 # TODO: implement
