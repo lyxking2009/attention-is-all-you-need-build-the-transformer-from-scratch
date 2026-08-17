@@ -470,8 +470,9 @@ def run_training_step_with_backprop(src_token_ids, tgt_token_ids, parameter_list
     apply_adam_step_to_all_parameters(parameter_list, optimizer_state, learning_rate, config.get('beta1', 0.9), config.get('beta2', 0.98), config.get('epsilon', 1e-9))
     return float(loss.item())
 
-# Step 73 - run_training_loop_for_steps (not yet solved)
-# TODO: implement
+# Step 73 - run_training_loop_for_steps
+def run_training_loop_for_steps(batches, parameter_list, model_params, optimizer_state, num_steps, config):
+    return [run_training_step_with_backprop(batches[index % len(batches)][0], batches[index % len(batches)][1], parameter_list, model_params, optimizer_state, index + 1, config) for index in range(num_steps)]
 
 # Step 74 - pick_next_token_by_argmax (not yet solved)
 # TODO: implement
