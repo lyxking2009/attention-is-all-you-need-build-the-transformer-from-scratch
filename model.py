@@ -68,11 +68,15 @@ import torch
 def fill_odd_indices_with_cos(pe, position, div_term):
     return torch.stack((pe[:, 0::2], torch.cos(position * div_term)), dim=-1).reshape_as(pe)
 
-# Step 12 - build_sinusoidal_positional_encoding (not yet solved)
-# TODO: implement
+# Step 12 - build_sinusoidal_positional_encoding
+import torch
 
-# Step 13 - add_positional_encoding_to_embeddings (not yet solved)
-# TODO: implement
+def build_sinusoidal_positional_encoding(max_len, d_model):
+    return torch.stack((torch.sin(torch.arange(max_len, dtype=torch.float32).unsqueeze(1) * torch.exp(torch.arange(0, d_model, 2, dtype=torch.float32) * (-torch.log(torch.tensor(10000.0)) / d_model))), torch.cos(torch.arange(max_len, dtype=torch.float32).unsqueeze(1) * torch.exp(torch.arange(0, d_model, 2, dtype=torch.float32) * (-torch.log(torch.tensor(10000.0)) / d_model)))), dim=-1).reshape(max_len, d_model)
+
+# Step 13 - add_positional_encoding_to_embeddings
+def add_positional_encoding_to_embeddings(embeddings, positional_encoding):
+        return embeddings + positional_encoding[:embeddings.size(1)].unsqueeze(0)
 
 # Step 14 - build_padding_mask (not yet solved)
 # TODO: implement
