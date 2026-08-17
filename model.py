@@ -251,8 +251,9 @@ def stack_decoder_layers(y, encoder_output, decoder_layer_params_list, num_heads
 def apply_final_output_projection(decoder_output, output_weight, output_bias=None):
     return apply_linear_projection(decoder_output, output_weight, output_bias)
 
-# Step 49 - tie_output_projection_to_token_embeddings (not yet solved)
-# TODO: implement
+# Step 49 - tie_output_projection_to_token_embeddings
+def tie_output_projection_to_token_embeddings(token_embedding_weight):
+    return token_embedding_weight.transpose(0, 1)
 
 # Step 50 - apply_log_softmax_over_vocab (not yet solved)
 # TODO: implement
