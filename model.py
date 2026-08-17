@@ -145,8 +145,11 @@ import torch
 def apply_linear_projection(x, weight, bias=None):
     return torch.nn.functional.linear(x, weight, bias)
 
-# Step 27 - project_to_query_key_value (not yet solved)
-# TODO: implement
+# Step 27 - project_to_query_key_value
+import torch
+
+def project_to_query_key_value(x, w_q, b_q, w_k, b_k, w_v, b_v):
+    return (torch.nn.functional.linear(x, w_q, b_q), torch.nn.functional.linear(x, w_k, b_k), torch.nn.functional.linear(x, w_v, b_v))
 
 # Step 28 - split_qkv_into_heads (not yet solved)
 # TODO: implement
