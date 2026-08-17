@@ -96,8 +96,9 @@ def combine_padding_and_causal_masks(padding_mask, causal_mask):
 def compute_raw_attention_scores(query, key):
         return query @ key.transpose(-2, -1)
 
-# Step 18 - scale_attention_scores (not yet solved)
-# TODO: implement
+# Step 18 - scale_attention_scores
+def scale_attention_scores(scores, d_k):
+        return scores / (d_k ** 0.5)
 
 # Step 19 - mask_attention_scores_with_neg_inf (not yet solved)
 # TODO: implement
