@@ -217,8 +217,9 @@ def assemble_encoder_layer(x, layer_params, num_heads, src_mask=None):
     x = encoder_layer_self_attention_sublayer(x, layer_params['w_q'], layer_params['w_k'], layer_params['w_v'], layer_params['w_o'], layer_params['attn_gamma'], layer_params['attn_beta'], num_heads, src_mask)
     return encoder_layer_feed_forward_sublayer(x, layer_params['w1'], layer_params['b1'], layer_params['w2'], layer_params['b2'], layer_params['ffn_gamma'], layer_params['ffn_beta'])
 
-# Step 42 - stack_encoder_layers (not yet solved)
-# TODO: implement
+# Step 42 - stack_encoder_layers
+def stack_encoder_layers(x, encoder_layer_params_list, num_heads, src_mask=None):
+    return x if len(encoder_layer_params_list) == 0 else stack_encoder_layers(assemble_encoder_layer(x, encoder_layer_params_list[0], num_heads, src_mask), encoder_layer_params_list[1:], num_heads, src_mask)
 
 # Step 43 - decoder_layer_masked_self_attention_sublayer (not yet solved)
 # TODO: implement
